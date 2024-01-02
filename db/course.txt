@@ -47,3 +47,4 @@
 5, SWE 4504, Software Security Lab
 5, SWE 4506, Design Project I 
 
+e=hvande=mc2
