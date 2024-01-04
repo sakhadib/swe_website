@@ -254,6 +254,27 @@ class utility {
         $conn->close();
         return $files;
     }
+
+
+    public function getUsers(){
+        $c = connect::getConnect();
+        $conn = $c->getConnection();
+        $users = "";
+        $sql = 'SELECT u.fullName AS user_name, u.sid, COUNT(f.file_id) AS contributed_file_count FROM shuser u LEFT JOIN file f ON u.sid = f.sid GROUP BY u.fullName, u.sid ORDER BY contributed_file_count DESC;';
+        $result = $conn->query($sql);
+        $ct = 1;
+        while ($row = $result->fetch_assoc()) {
+            $users .= '<tr>
+                        <td>'. $ct .'</td>
+                        <td><a href="../library/?by='. $row["sid"] .'">'. $row["user_name"] .'</a></td>
+                        <td>'. $row["contributed_file_count"] .'</td>
+                    </tr>';
+            $ct++;
+        }
+        $conn->close();
+        return $users;
+        
+    }
 }
 
 

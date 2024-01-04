@@ -50,7 +50,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Library</a>
+                <a class="nav-link" href="library/">Library</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Questions</a>
