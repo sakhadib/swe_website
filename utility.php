@@ -91,6 +91,95 @@ class utility {
         $conn->close();
         return $fileTypes;
     }
+
+    public function getCourses($sem) {
+        $c = connect::getConnect();
+        $conn = $c->getConnection();
+        $courses = "";
+        $sql = "SELECT course_ID, course_Name FROM `course` WHERE semester = '$sem'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Concatenate course IDs with a comma and space
+                $courses .= '<li><a class="link-primary" href="../library/?course='. $row["course_ID"] .'">'. $row["course_ID"] .' - '. $row["course_Name"] .'</a></li>';
+            }
+        }
+        $conn->close();
+        return $courses;
+    }
+
+    public function getFiles(){
+        $c = connect::getConnect();
+        $conn = $c->getConnection();
+        $files = "";
+        $sql = 'SELECT 
+                    f.date,
+                    f.file_name,
+                    f.file_id,
+                    f.file_type,
+                    u.fullName AS uploader_name,
+                    f.course_id,
+                    c.course_Name AS course_title
+                FROM 
+                    file f
+                JOIN 
+                    shuser u ON f.sid = u.sid
+                JOIN 
+                    course c ON f.course_id = c.course_ID;';
+        $result = $conn->query($sql);
+        $ct = 1;
+        while ($row = $result->fetch_assoc()) {
+            $files .= '<tr>
+                        <td>'. $ct .'</td>
+                        <td>'. $row["date"] .'</td>
+                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a></td>
+                        <td>'.$row["file_type"] .'</td>
+                        <td>'.$row["course_id"] .' - ' .$row["course_title"] .'</td>
+                        <td>'. $row["uploader_name"] .'</td>
+                    </tr>';
+            $ct++;
+        }
+        $conn->close();
+        return $files;
+    }
+
+    public function getFilesByCourse($course){
+        $c = connect::getConnect();
+        $conn = $c->getConnection();
+        $files = "";
+        $sql = 'SELECT 
+                    f.date,
+                    f.file_name,
+                    f.file_id,
+                    f.file_type,
+                    u.fullName AS uploader_name,
+                    f.course_id,
+                    c.course_Name AS course_title
+                FROM 
+                    file f
+                JOIN 
+                    shuser u ON f.sid = u.sid
+                JOIN 
+                    course c ON f.course_id = c.course_ID
+                WHERE
+                    f.course_id = "'.$course.'";';
+        $result = $conn->query($sql);
+        $ct = 1;
+        while ($row = $result->fetch_assoc()) {
+            $files .= '<tr>
+                        <td>'. $ct .'</td>
+                        <td>'. $row["date"] .'</td>
+                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a></td>
+                        <td>'.$row["file_type"] .'</td>
+                        <td>'.$row["course_id"] .' - ' .$row["course_title"] .'</td>
+                        <td>'. $row["uploader_name"] .'</td>
+                    </tr>';
+            $ct++;
+        }
+        $conn->close();
+        return $files;
+    }
 }
 
 

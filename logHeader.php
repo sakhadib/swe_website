@@ -18,6 +18,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="../contributors">Contributors</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../edit">Edit Files</a>
+              </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../about">About Us</a>
                 </li>
