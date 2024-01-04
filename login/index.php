@@ -1,11 +1,12 @@
 <?php
+    require_once "../utility.php";
     $error = "";
-    require_once "../connection.php";
+    $conn = connect::getConnect()->getConnection();
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uname = $_POST['sid'];
         $pass = $_POST['password'];
 
-        $sql = "SELECT sid, batch, pass FROM `shuser` WHERE `sid` = '$uname'";
+        $sql = "SELECT sid, fullName, batch, pass FROM `shuser` WHERE `sid` = '$uname'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();

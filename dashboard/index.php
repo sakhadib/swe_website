@@ -1,10 +1,18 @@
 <!-- Course Pull -->
 <?php
+    session_start();
+    if(!isset($_SESSION['sid'])){
+        header("Location: ../");
+        exit();
+    }
+
+    
+    
     require_once "../utility.php";
     $u = utility::getUtility();
     $courses = $u->getCourseCodes();
     $fileTypes = $u->getFileTypes();
-?>
+?> 
 
 <!-- Type Pull -->
 
@@ -38,10 +46,14 @@
     </head>
 
     <body>
-        <header>
-            <!-- place navbar here -->
-        </header>
-
+        <?php
+            if(isset($_SESSION['sid'])){
+                require_once "../logHeader.php";
+            }
+            else{
+                require_once "../header.php";
+            }
+        ?>
 
 
 
@@ -58,30 +70,23 @@
             <div class="container">
                 <div class="row df jc-c ai-c vh-80">
                     <div class="col-md-7">
-                        <h1>Share A new FIle</h1>
+                        <h1 class="jb">> Share A new File</h1>
                         <hr>
-                        <form action="" class="mt-4">
+                        <p class="text-secondary">Please Select the course code from selection. It will help formatting for later use</p>
+                        <form action="action.php" class="mt-4" method="post">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control bs" id="floatingInput" placeholder="name@example.com">
+                                            <input required type="text" name="title" class="form-control bs" id="floatingInput" placeholder="name@example.com">
                                             <label for="floatingInput">File Title</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="url" class="form-control bs" id="floatingInput" placeholder="name@example.com">
-                                            <label for="floatingInput">File URL (Google Drive Link Recommended)</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-7">
                                         <div class="form-floating mb-3">
-                                            <input list="datalistOptions1" id="exampleDataList1"  class="form-control bs" placeholder="< Enter Course Code >">
+                                            <input required list="datalistOptions1" name="type" id="exampleDataList1"  class="form-control bs" placeholder="< Enter Course Code >">
                                             <datalist id="datalistOptions1">
                                                 <?php echo $fileTypes; ?>
                                             </datalist>                                            
@@ -91,7 +96,7 @@
                                     
                                     <div class="col-md-5">
                                         <div class="form-floating mb-3">
-                                        <input list="datalistOptions2" id="exampleDataList2"  class="form-control bs" placeholder="< Enter Course Code >">
+                                        <input required list="datalistOptions2" name="code" id="exampleDataList2"  class="form-control bs" placeholder="< Enter Course Code >">
                                         <datalist id="datalistOptions2">
                                             <?php echo $courses; ?>
                                         </datalist>                                            
@@ -100,8 +105,30 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input required type="url" name="url" class="form-control bs" id="floatingInput" placeholder="name@example.com">
+                                            <label for="floatingInput">File URL (Google Drive Link Recommended)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-success" style="width: 100%;">Submit</button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <?php
+                                            if(isset($_GET['error'])){
+                                                echo "<p class='text-center text-danger mt-3'>".$_GET['error']."</p>";
+                                            }
+                                            else if(isset($_GET['success'])){
+                                                echo "<p class='text-center text-success mt-3'>".$_GET['success']."</p>";
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -119,8 +146,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <h3 class="text-center">Adib Sakhawat</h3>
-                                        <p class="text-center"><strong>210042106</strong> <br>SWE - 21</p>
+                                        <h3 class="text-center"><?php echo $_SESSION['name']; ?></h3>
+                                        <p class="text-center"><strong><?php echo $_SESSION['sid'] ?></strong> <br>SWE - <?php echo $_SESSION['batch']; ?></p>
                                     </div>
                                 </div>
                                 <div class="row">

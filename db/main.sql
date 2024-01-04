@@ -6,6 +6,12 @@ CREATE TABLE file (
     FOREIGN KEY (file_type) REFERENCES file_type(ftype)
 );
 
+Alter table file add column course_id varchar(10);
+Alter table file add column sid int;
+Alter table FOREIGN KEY (course_id) REFERENCES course(course_ID);
+Alter table FOREIGN KEY (sid) REFERENCES shuser(sid);
+Alter table file add column date date;
+
 CREATE TABLE file_type (
     ftype VARCHAR(30) PRIMARY KEY
 );

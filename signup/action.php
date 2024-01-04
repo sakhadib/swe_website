@@ -1,7 +1,8 @@
 <?php
     $error = "";
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        require_once "../connection.php";
+        require_once '../utility.php';
+        $conn = connect::getConnect()->getConnection();
         // Retrieve form data using $_POST
 
         $fullName = $_POST['fullName'];

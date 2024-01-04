@@ -64,7 +64,7 @@
             </ul>
             <ul class="navbar-nav mb-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login/">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#signup">Sign Up</a>
@@ -114,7 +114,7 @@
     <div class="container vh-50 mt-5">
         <div class="row">
             <div class="col-md-6 df ai-c jc-c">
-                <img src="rsx/join.avif" alt="" style="width: 500px;">
+                <img src="rsx/join.png" alt="" style="width: 500px;">
             </div>
             <div class="col-md-6">
                 <h3>Get <span class="text-success jb">Notes</span> from your friends and seniors</h3>
@@ -220,13 +220,13 @@
                         <div class="row">
                             <div class="col-7">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="fullName" id="floatingInput" placeholder="What is your Full Name ?">
+                                    <input type="text" class="form-control bs" name="fullName" id="floatingInput" placeholder="What is your Full Name ?">
                                     <label for="floatingInput">Your Full Name</label>
                                 </div>
                             </div>
                             <div class="col-5">
                                 <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" name="sid" id="floatingInput" placeholder="What is your Full Name ?">
+                                    <input type="number" class="form-control bs" name="sid" id="floatingInput" placeholder="What is your Full Name ?">
                                     <label for="floatingInput">Student ID</label>
                                 </div>
                             </div>
@@ -235,13 +235,13 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" name="email" id="floatingInput" placeholder="What is your Full Name ?">
+                                    <input type="email" class="form-control bs" name="email" id="floatingInput" placeholder="What is your Full Name ?">
                                     <label for="floatingInput">Email address</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" name="Batch" id="floatingInput" placeholder="What is your Full Name ?">
+                                    <input type="number" class="form-control bs" name="Batch" id="floatingInput" placeholder="What is your Full Name ?">
                                     <label for="floatingInput">Batch eg. 23</label>
                                 </div>
                             </div>
@@ -251,13 +251,13 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" name="pass" id="floatingInput" placeholder="What is your Full Name ?">
+                                    <input type="password" class="form-control bs" name="pass" id="floatingInput" placeholder="What is your Full Name ?">
                                     <label for="floatingInput">Password</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" name="RetypePass" id="floatingInput" placeholder="What is your Full Name ?">
+                                    <input type="password" class="form-control bs" name="RetypePass" id="floatingInput" placeholder="What is your Full Name ?">
                                     <label for="floatingInput">Retype Password</label>
                                 </div>
                             </div>

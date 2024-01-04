@@ -23,6 +23,7 @@
     }
 ?>
 
+
 <?php
 class utility {
     private static utility $u;
@@ -91,3 +92,6 @@ class utility {
         return $fileTypes;
     }
 }
+
+
+
