@@ -126,15 +126,15 @@ class utility {
                 JOIN 
                     shuser u ON f.sid = u.sid
                 JOIN 
-                    course c ON f.course_id = c.course_ID;';
+                    course c ON f.course_id = c.course_ID
+                ORDER BY f.date DESC;';
+
         $result = $conn->query($sql);
         $ct = 1;
         while ($row = $result->fetch_assoc()) {
             $files .= '<tr>
                         <td>'. $ct .'</td>
-                        <td>'. $row["date"] .'</td>
-                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a></td>
-                        <td>'.$row["file_type"] .'</td>
+                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a> &nbsp&nbsp<span class="badge bg-secondary jb"><a class="link-light" href="../library/?type='. $row["file_type"] .'">'.$row["file_type"] .'</a></span></td>
                         <td>'.$row["course_id"] .' - ' .$row["course_title"] .'</td>
                         <td>'. $row["uploader_name"] .'</td>
                     </tr>';
@@ -163,15 +163,89 @@ class utility {
                 JOIN 
                     course c ON f.course_id = c.course_ID
                 WHERE
-                    f.course_id = "'.$course.'";';
+                    f.course_id = "'.$course.'"
+                ORDER BY
+                    f.date DESC;';
         $result = $conn->query($sql);
         $ct = 1;
         while ($row = $result->fetch_assoc()) {
             $files .= '<tr>
                         <td>'. $ct .'</td>
-                        <td>'. $row["date"] .'</td>
-                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a></td>
-                        <td>'.$row["file_type"] .'</td>
+                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a> &nbsp&nbsp<span class="badge bg-secondary jb"><a class="link-light" href="../library/?type='. $row["file_type"] .'">'.$row["file_type"] .'</a></span></td>
+                        <td>'.$row["course_id"] .' - ' .$row["course_title"] .'</td>
+                        <td>'. $row["uploader_name"] .'</td>
+                    </tr>';
+            $ct++;
+        }
+        $conn->close();
+        return $files;
+    }
+
+    public function getFilebyType($type){
+        $c = connect::getConnect();
+        $conn = $c->getConnection();
+        $files = "";
+        $sql = 'SELECT 
+                    f.date,
+                    f.file_name,
+                    f.file_id,
+                    f.file_type,
+                    u.fullName AS uploader_name,
+                    f.course_id,
+                    c.course_Name AS course_title
+                FROM 
+                    file f
+                JOIN 
+                    shuser u ON f.sid = u.sid
+                JOIN 
+                    course c ON f.course_id = c.course_ID
+                WHERE
+                    f.file_type = "'.$type.'"
+                ORDER BY
+                    f.date DESC;';
+        $result = $conn->query($sql);
+        $ct = 1;
+        while ($row = $result->fetch_assoc()) {
+            $files .= '<tr>
+                        <td>'. $ct .'</td>
+                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a> &nbsp&nbsp<span class="badge bg-secondary jb"><a class="link-light" href="../library/?type='. $row["file_type"] .'">'.$row["file_type"] .'</a></span></td>
+                        <td>'.$row["course_id"] .' - ' .$row["course_title"] .'</td>
+                        <td>'. $row["uploader_name"] .'</td>
+                    </tr>';
+            $ct++;
+        }
+        $conn->close();
+        return $files;
+    }
+
+    public function getFilesByUser($sid){
+        $c = connect::getConnect();
+        $conn = $c->getConnection();
+        $files = "";
+        $sql = 'SELECT 
+                    f.date,
+                    f.file_name,
+                    f.file_id,
+                    f.file_type,
+                    u.fullName AS uploader_name,
+                    f.course_id,
+                    c.course_Name AS course_title
+                FROM 
+                    file f
+                JOIN 
+                    shuser u ON f.sid = u.sid
+                JOIN 
+                    course c ON f.course_id = c.course_ID
+                WHERE
+                    f.sid = "'.$sid.'"
+                ORDER BY
+                    f.date DESC;';
+        $result = $conn->query($sql);
+        $ct = 1;
+        while ($row = $result->fetch_assoc()) {
+            $files .= '<tr>
+                        <td>'. $ct .'</td>
+                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a> &nbsp&nbsp<span class="badge bg-secondary jb"><a class="link-light" href="../library/?type='. $row["file_type"] .'">'.$row["file_type"] .'</a></span></td>
                         <td>'.$row["course_id"] .' - ' .$row["course_title"] .'</td>
                         <td>'. $row["uploader_name"] .'</td>
                     </tr>';

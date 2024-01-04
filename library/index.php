@@ -19,9 +19,13 @@
         // die($course);
         $rows = $ut->getFilesByCourse($course);
     }
+    else if(isset($_GET['type'])){
+        $type = $_GET['type'];
+        $rows = $ut->getFilebyType($type);
+    }
     else if(isset($_GET['by'])){
         $by = $_GET['by'];
-        // $files = $ut->getFilesBy($by);
+        $rows = $ut->getFilesByUser($by);
     }
     else{
         $rows = $ut->getFiles();
@@ -137,6 +141,16 @@
                                     <span class="badge bg-secondary">:> File For '.$_GET['course'].'</span>
                                 </h1>';
                     }
+                    else if(isset($_GET['type'])){
+                        echo '<h1 class="jb mt-4">
+                                    <span class="badge bg-secondary">:> '.$_GET['type'].'s</span>
+                                </h1>';
+                    }
+                    else if(isset($_GET['by'])){
+                        echo '<h1 class="jb mt-4">
+                                    <span class="badge bg-secondary">:> Files By '.$_GET['by'].'</span>
+                                </h1>';
+                    }
                 ?>
                 
             </div>
@@ -167,9 +181,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Date</th>
                                         <th>File Title</th>
-                                        <th>Type</th>
                                         <th>Course</th>
                                         <th>By</th>
                                     </tr>
