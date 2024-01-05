@@ -20,6 +20,14 @@
             }
             return $conn;
         }
+
+        // public function getConnection(){
+        //     $conn = new mysqli("localhost", "sakhawa2_swe", "e=hvande=mc2", "sakhawa2_softDB");
+        //     if ($conn->connect_error) {
+        //         die("Connection failed: " . $conn->connect_error);
+        //     }
+        //     return $conn;
+        // }
     }
 ?>
 
