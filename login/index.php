@@ -71,9 +71,6 @@
                         </div>
                         <button type="submit" class="btn btn-danger mt-4" style="width: 100%;">login</button>
                     </form>
-                    <div class="back-link text-center mt-3">
-                        <a href="../">Back to home</a>
-                    </div>
                 </div>
             </div>
             <div class="row">

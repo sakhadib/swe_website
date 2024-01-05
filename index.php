@@ -64,12 +64,12 @@
                             header("Location: login/");
                         }
                     }
-            ?>
+            ?> 
             </div>
         </div> -->
         <div class="row vh-60 df jc-c ai-c">
             <div class="col-md-6">
-                <h3 class="text-danger greet-text jb">Hello !</h3>
+                <h3 class="text-danger greet-text jb">Hello !!</h3>
                 <h2 class="greet-text jb">IUTian Software People</h2>
                 <hr>
                 <h5>Lets have some <i class="uil uil-coffee"></i> first, then we'll find your file</h5>

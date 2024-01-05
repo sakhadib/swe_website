@@ -20,9 +20,9 @@
     $row = $result->fetch_assoc();
     $escapedUrl = str_replace("/view", "/preview", $row['url']);
     $title = $row['file_name'];
-    $courseName = $row['course_name'];
-    $CourseCode = $row['course_id'];
-    $user = $row['uploader_name']." (".$row['uploader_ID'].")";
+    $courseName = "<a href='../library/?course=". $row['course_id'] . "'>" . $row['course_name'] . "</a>";
+    $CourseCode = "<a href='../library/?course=" . $row['course_id'] . "'>" . $row['course_id'] . "</a>";
+    $user = "<a href='../library/?by=".$row['uploader_ID'] ."'>" .$row['uploader_name']." (".$row['uploader_ID'].")" . "</a>";
     $batch = $row['uploader_Batch'];
 
     $meta =   $CourseCode . " - " .$courseName . " --- " . $user . " - Batch " . $batch;
@@ -57,10 +57,11 @@
 </head>
 <body>
     <?php 
+        session_start();
         if(isset($_SESSION['sid'])){
-            include('../logHeader.php');
+            require_once '../logHeader.php';
         }else{
-            include('../header.php');
+            require_once '../header.php';
         }
     ?>
     <div class="sh-container">
@@ -73,7 +74,7 @@
                     <h6><?php echo $meta?></h6>
                     <button id="copyButton" class="btn btn-warning mt-3" onclick="copyPageLink()"><i class="uil uil-copy"></i> Copy file link to share</button>
                     <a href="<?php echo $escapedUrl; ?>" target="_blank" class="btn btn-primary mt-3"><i class="uil uil-arrow-up-right"></i> Open in New Tab</a>
-                    <div id="copyMessage" class="mt-2" style="display: none;">Link copied to clipboard!</div>
+                    <div id="copyMessage" class="mt-2" style="display: none;"><span class="text-success">Success !</span>Link copied to clipboard!</div>
                     <hr>
                 </div>
             </div>
