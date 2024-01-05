@@ -15,6 +15,11 @@
 
 ?>
 
+<?php
+// Header
+
+?>
+
 
 
 <!DOCTYPE html>
@@ -38,41 +43,15 @@
 <body>
 
 <!-- Nav -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-          <a class="navbar-brand" href="#" style="font-family: 'Train One'"><i class="uil uil-coffee"></i> IUT SWE Files</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="library/">Library</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Questions</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contributors</a>
-              </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav mb-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="login/">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#signup">Sign Up</a>
-                </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+<?php
+    session_start();
+    if(isset($_SESSION['sid'])){
+        require_once "logHeaderidx.php";
+    }
+    else{
+        require_once "headeridx.php";
+    }
+?>
 <!-- End of Nav -->
     
 <!-- Greetings -->
@@ -95,8 +74,8 @@
                 <hr>
                 <h5>Lets have some <i class="uil uil-coffee"></i> first, then we'll find your file</h5>
 
-                <form action="#" class="df jc-c ai-c mt-4 course-finder">
-                    <input list="datalistOptions" id="exampleDataList"  class="form-control bs" placeholder="< Enter Course Code >">&nbsp;&nbsp;
+                <form action="library/" class="df jc-c ai-c mt-4 course-finder" method="get">
+                    <input list="datalistOptions" id="exampleDataList" name="course" class="form-control bs" placeholder="< Enter Course Code >">&nbsp;&nbsp;
                     <datalist id="datalistOptions">
                         <?php echo $courses; ?>
                     </datalist>

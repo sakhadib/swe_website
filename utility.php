@@ -275,6 +275,58 @@ class utility {
         return $users;
         
     }
+
+    public function getFileEdit($sid){
+        $c = connect::getConnect();
+        $conn = $c->getConnection();
+        $files = "";
+        $sql = 'SELECT 
+                    f.date,
+                    f.file_name,
+                    f.file_id,
+                    f.file_type,
+                    u.fullName AS uploader_name,
+                    f.course_id,
+                    c.course_Name AS course_title
+                FROM 
+                    file f
+                JOIN 
+                    shuser u ON f.sid = u.sid
+                JOIN 
+                    course c ON f.course_id = c.course_ID
+                WHERE
+                    f.sid = "'.$sid.'"
+                ORDER BY
+                    f.date DESC;';
+        $result = $conn->query($sql);
+        $ct = 1;
+        while ($row = $result->fetch_assoc()) {
+            $files .= '<tr>
+                        <td>'. $ct .'</td>
+                        <td><a href="../file/?id='. $row["file_id"] .'">'. $row["file_name"] .'</a> &nbsp&nbsp<span class="badge bg-secondary jb"><a class="link-light" href="../library/?type='. $row["file_type"] .'">'.$row["file_type"] .'</a></span></td>
+                        <td>'.$row["course_id"] .' - ' .$row["course_title"] .'</td>
+                        <td><a class="link-light bg-primary badge" href="edit.php?fid='. $row["file_id"] .'"><i class="uil uil-edit"></i> Edit</a>
+                        <a class="link-light bg-danger badge" href="dlt.php?id='. $row["file_id"] .'"><i class="uil uil-trash-alt"></i> Delete</a>
+                        </td>
+                    </tr>';
+            $ct++;
+        }
+        $conn->close();
+        return $files;
+    }
+
+    public function indexHeader(){
+        $head = "";
+        session_start();
+        if(!isset($_SESSION['sid'])){
+            $head = `    `;
+        }
+        else{
+            $head = ``;
+        }
+
+        return $head;
+    }
 }
 
 

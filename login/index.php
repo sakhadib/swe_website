@@ -46,6 +46,15 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
 <body>
+    <!-- include header -->
+    <?php
+            if(isset($_SESSION['sid'])){
+                require_once "../logHeader.php";
+            }
+            else{
+                require_once "../header.php";
+            }
+        ?>
     <div class="sh-login-sec">
         <div class="container">
             <div class="row">
